@@ -1,8 +1,10 @@
+"use client"
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {navItems} from "@/constants"
+
 const Sidebar = () => {
     const pathname = usePathname();
   return <aside className="sidebar">
@@ -22,9 +24,14 @@ const Sidebar = () => {
     </Link>
     <nav className="sidebar-nav">
         <ul className="flex flex-1 flex-col gap-6">
-            {navItems.map((item) => {
-                const active = pathname === item.url;
-            }
+            {navItems.map(({url, name, icon}) => (
+                <li key={url}>
+                    <Link href={url} className="flex items-center gap-2 lg:w-full">
+                    <Image src={icon} alt={name} width={24} height={24} />
+                    <p>{name}</p>
+                    </Link>
+                </li>
+            ))}
         </ul>
     </nav>
   </aside>
