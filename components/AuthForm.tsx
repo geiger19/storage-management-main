@@ -31,7 +31,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState('');
     const formSchema = authFormSchema(type);
-    const [accountId, setAccountId] = React.useState(null);
+    const [accountId, setAccountId] = React.useState("");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -125,7 +125,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                 </div>
             </form>
         </Form>
-        {!accountId && <OtpModal email={form.getValues('email')} accountId={accountId}/>}
+        {accountId && <OtpModal email={form.getValues('email')} accountId={accountId}/>}
         </>
     );
 
